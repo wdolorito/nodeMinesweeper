@@ -55,14 +55,14 @@ games.push(expert)
 
 const startGame = function() {
   if(!gameTimer) {
-    console.log('Game started')
+    // console.log('Game started')
     setupTimer()
   }
 }
 
 const endGame  = function() {
   gameRunning = false
-  console.log('Game ended')
+  // console.log('Game ended')
   clearInterval(gameTimer)
   gameTimer = null
 }
@@ -89,7 +89,7 @@ const setupTimer = function() {
 const validateGame = function() {
   let expected = (game.rows * game.columns) - game.mines
   let checked = $(document).find('.game img[checked]').length
-  console.log(expected, checked)
+  // console.log(expected, checked)
   if(checked === expected) winGame()
 }
 
@@ -117,6 +117,7 @@ const refreshTileSet = function() {
     let currImg = $(this).attr('src')
     let lastSlash = currImg.lastIndexOf('/')
     let baseImg = currImg.substr(lastSlash + 1)
+    console.log(tileSet)
     let newImg = tileSet + baseImg
     $(this).attr('src', newImg)
   })
@@ -140,7 +141,7 @@ const returnInitialGameBoard = function(diff) {
       game = games[2]
       break
     default:
-      console.log('You shouldn\'t be here')
+      // console.log('You shouldn\'t be here')
   }
   let rows = game.rows
   let cols = game.columns
@@ -320,7 +321,7 @@ const toggleFlag = function(tile) {
         if(minesInPlay < 0) minesInPlay = 0
         break
       default:
-        console.log('nothing to do')
+        // console.log('nothing to do')
     }
   }
   $('#minesInPlay').html(minesInPlay)
@@ -417,11 +418,11 @@ const revealTile = function(tile) {
       $(tile).addClass('tile')
       break
     case 'x':
-      console.log('boom')
+      // console.log('boom')
       loseGame()
       break
     default:
-      console.log('something broke')
+      // console.log('something broke')
   }
   validateGame()
 }
@@ -434,21 +435,21 @@ const revealTile = function(tile) {
 $(document).on('mousedown', '.tileImg', function(e) {
   switch (e.which) {
       case 1:
-          console.log('Left Mouse button pressed.')
+          // console.log('Left Mouse button pressed.')
           let xpos = $(this).attr('xpos')
           let ypos = $(this).attr('ypos')
-          console.log(xpos, ypos)
+          // console.log(xpos, ypos)
           revealTile($(this))
           break
       case 2:
-          console.log('Middle Mouse button pressed.')
+          // console.log('Middle Mouse button pressed.')
           break
       case 3:
-          console.log('Right Mouse button pressed.')
+          // console.log('Right Mouse button pressed.')
           toggleFlag($(this))
           break
       default:
-          console.log('You have a strange Mouse!')
+          // console.log('You have a strange Mouse!')
   }
 })
 
@@ -463,6 +464,7 @@ $('.diff').click(function() {
   endGame()
   resetTimer()
   returnInitialGameBoard($(this).attr('difficulty').trim())
+  refreshTileSet()
 })
 
 $('.tsImg').click(function() {
@@ -476,10 +478,6 @@ $('.tsImg').click(function() {
  */
 
 $(document).ready(function () {
-  // console.log($(window).width())
-  // $(window).resize(function() {
-  //   $( "#log" ).append( "<div>Handler for .resize() called.</div>" );
-  // })
   $('#ddDiffTop').html(initGame)
   returnInitialGameBoard(initGame)
 })
