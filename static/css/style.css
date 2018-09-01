@@ -1,0 +1,8 @@
+body {
+  margin-bottom: 40px;
+}
+
+.tileImg, .tile {
+  height: 30px;
+  width: 30px;
+}

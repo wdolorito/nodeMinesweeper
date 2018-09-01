@@ -1,0 +1,21 @@
+{
+  "name": "nodeminesweeper",
+  "version": "1.0.0",
+  "description": "Simple minesweeper clone",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/wdolorito/nodeMinesweeper.git"
+  },
+  "author": "William Dolorito",
+  "license": "UNLICENSED"
+}
