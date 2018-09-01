@@ -18,7 +18,7 @@ pics.empty = 'empty.png'
 pics.exploded = 'explode.png'
 pics.flag = 'flag.png'
 let baseAssetPath = '/assets/'
-let tileSet = 'set1/'
+let tileSet = baseAssetPath + 'set1/'
 let gameTimer = null
 let timeCount = 0
 let minesInPlay = 0
@@ -55,14 +55,12 @@ games.push(expert)
 
 const startGame = function() {
   if(!gameTimer) {
-    // console.log('Game started')
     setupTimer()
   }
 }
 
 const endGame  = function() {
   gameRunning = false
-  // console.log('Game ended')
   clearInterval(gameTimer)
   gameTimer = null
 }
@@ -77,7 +75,6 @@ const setupTimer = function() {
   gameTimer = setInterval(function() {
     timeCount++
     $('#gameTimer').html(timeCount)
-    // console.log(timeCount)
   }, 1000)
 }
 
@@ -89,17 +86,18 @@ const setupTimer = function() {
 const validateGame = function() {
   let expected = (game.rows * game.columns) - game.mines
   let checked = $(document).find('.game img[checked]').length
-  // console.log(expected, checked)
   if(checked === expected) winGame()
 }
 
 const loseGame = function() {
   endGame()
+  disableTiles()
   alert('you lost')
 }
 
 const winGame = function() {
   endGame()
+  disableTiles()
   alert('You won!\nScore: ' + timeCount)
 }
 
@@ -117,9 +115,15 @@ const refreshTileSet = function() {
     let currImg = $(this).attr('src')
     let lastSlash = currImg.lastIndexOf('/')
     let baseImg = currImg.substr(lastSlash + 1)
-    console.log(tileSet)
     let newImg = tileSet + baseImg
     $(this).attr('src', newImg)
+  })
+}
+
+const disableTiles = function() {
+  $(document).find('.game img').each(function() {
+    $(this).removeClass('tileImg')
+    $(this).addClass('tile')
   })
 }
 
@@ -141,13 +145,12 @@ const returnInitialGameBoard = function(diff) {
       game = games[2]
       break
     default:
-      // console.log('You shouldn\'t be here')
   }
   let rows = game.rows
   let cols = game.columns
-  for(let outer = 0; outer < rows; outer++) {
-    for(let inner = 0; inner < cols; inner++) {
-      html += '<img class="tileImg" src="' + baseAssetPath + tileSet + pics.default + '" xpos="' + inner +'" ypos="' + outer + '"></img>'
+  for(let row = 0; row < rows; row++) {
+    for(let col = 0; col < cols; col++) {
+      html += '<img class="tileImg" src="' + tileSet + pics.default + '" xpos="' + col +'" ypos="' + row + '"></img>'
     }
     html += '<br />\n'
   }
@@ -298,14 +301,13 @@ const toggleFlag = function(tile) {
   if(minesInPlay <= mines) {
     let currImg = $(tile).attr('src')
     let lastSlash = currImg.lastIndexOf('/')
-    let basePath = currImg.substr(0, lastSlash + 1)
     let baseImg = currImg.substr(lastSlash + 1)
     switch(baseImg) {
       case 'default.png':
         if(!minesFull) {
           minesInPlay++
           if(minesInPlay > mines) minesInPlay = mines
-          $(tile).attr('src', basePath + pics.flag)
+          $(tile).attr('src', tileSet + pics.flag)
           $(tile).removeAttr('checked')
         }
         if(minesInPlay === mines) {
@@ -316,12 +318,11 @@ const toggleFlag = function(tile) {
         break
       case 'flag.png':
         minesInPlay--
-        $(tile).attr('src', basePath + pics.default)
+        $(tile).attr('src', tileSet + pics.default)
         $(tile).removeAttr('checked')
         if(minesInPlay < 0) minesInPlay = 0
         break
       default:
-        // console.log('nothing to do')
     }
   }
   $('#minesInPlay').html(minesInPlay)
@@ -418,14 +419,26 @@ const revealTile = function(tile) {
       $(tile).addClass('tile')
       break
     case 'x':
-      // console.log('boom')
+      $(tile).removeClass('tileImg')
+      $(tile).addClass('tile')
       loseGame()
       break
     default:
-      // console.log('something broke')
   }
   validateGame()
 }
+
+/*
+ * Disable right click menu
+ */
+
+document.oncontextmenu = function () { // IE8 compatibility
+  return false
+}
+
+window.addEventListener('contextmenu', function (e) {
+  e.preventDefault()
+}, false)
 
 /*
  * User interaction functions
@@ -434,22 +447,17 @@ const revealTile = function(tile) {
 
 $(document).on('mousedown', '.tileImg', function(e) {
   switch (e.which) {
-      case 1:
-          // console.log('Left Mouse button pressed.')
-          let xpos = $(this).attr('xpos')
-          let ypos = $(this).attr('ypos')
-          // console.log(xpos, ypos)
-          revealTile($(this))
-          break
-      case 2:
-          // console.log('Middle Mouse button pressed.')
-          break
-      case 3:
-          // console.log('Right Mouse button pressed.')
-          toggleFlag($(this))
-          break
-      default:
-          // console.log('You have a strange Mouse!')
+    case 1:
+      let xpos = $(this).attr('xpos')
+      let ypos = $(this).attr('ypos')
+      revealTile($(this))
+      break
+    case 2:
+      break
+    case 3:
+      toggleFlag($(this))
+      break
+    default:
   }
 })
 
