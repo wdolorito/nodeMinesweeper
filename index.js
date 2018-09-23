@@ -7,7 +7,7 @@ let port = 3000
 app.use(express.static(__dirname + '/static'))
 
 try {
-  port = fs.readFileSync('port', 'utf8')
+  port = fs.readFileSync(__dirname + '/port', 'utf8')
   console.log('input port: ' + port)
 } catch(error) {
   console.log(error.stack)
