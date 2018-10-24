@@ -486,7 +486,8 @@ $('.tsImg').click(function() {
  */
 
 $(document).ready(function () {
-  $(".button-collapse").sideNav()
+  $('.modal').modal()
+  $('.button-collapse').sideNav()
   $('#ddDiffTop').html(initGame)
   returnInitialGameBoard(initGame)
 })
