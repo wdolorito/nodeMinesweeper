@@ -39,10 +39,37 @@
     <div id="help" class="modal">
       <div class="modal-content">
         <h4>Help</h4>
-        <p>A bunch of text</p>
+
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="A Name" id="name" type="text" class="validate">
+                <label for="name">Name</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="name@example.com" id="email" type="email" class="validate">
+                <label for="email">Email address</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea placeholder="Howdy!" id="subjectArea" class="materialize-textarea" data-length="30"></textarea>
+                <label for="subjectArea">Subject</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea placeholder="Your site is handy!" id="messageArea" class="materialize-textarea" data-length="200"></textarea>
+                <label for="messageArea">Message</label>
+              </div>
+            </div>
+          </form>
+
       </div>
       <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+        <a class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
       </div>
     </div>
 
