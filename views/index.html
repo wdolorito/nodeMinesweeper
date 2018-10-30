@@ -26,59 +26,65 @@
       <div class="nav-wrapper blue lighten-5">
         <a href="#" data-activates="nav" class="button-collapse black-text"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-          <li><a class="waves-effect waves-light btn modal-trigger blue accent-1" href="#help">Help</a><li>
           <li><a class="waves-effect waves-light btn modal-trigger blue accent-1" href="#about">About</a><li>
+          <li><a class="waves-effect waves-light btn modal-trigger blue accent-1" href="#emailMe">Email Me!</a><li>
         </ul>
         <ul class="side-nav blue lighten-5 black-text" id="nav">
-          <li><a class="waves-effect waves-light btn modal-trigger blue accent-1" href="#help">Help</a><li>
           <li><a class="waves-effect waves-light btn modal-trigger blue accent-1" href="#about">About</a><li>
+          <li><a class="waves-effect waves-light btn modal-trigger blue accent-1" href="#emailMe">Email Me!</a><li>
         </ul>
       </div>
     </nav>
 
-    <div id="help" class="modal">
-      <div class="modal-content">
-        <h4>Help</h4>
-
-          <form class="col s12">
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="A Name" id="name" type="text" class="validate">
-                <label for="name">Name</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="name@example.com" id="email" type="email" class="validate">
-                <label for="email">Email address</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <textarea placeholder="Howdy!" id="subjectArea" class="materialize-textarea" data-length="30"></textarea>
-                <label for="subjectArea">Subject</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <textarea placeholder="Your site is handy!" id="messageArea" class="materialize-textarea" data-length="200"></textarea>
-                <label for="messageArea">Message</label>
-              </div>
-            </div>
-          </form>
-
+    <div id="about" class="modal">
+      <div class="modal-content blue lighten-5">
+        <h4>What the heck is this?</h4>
+        <p>This site is served using <a href="https://nodejs.org/en/">Node</a> and the <a href="https://expressjs.com/">Express</a> framework.</p>
+        <p>Styling provided by <a href="http://archives.materializecss.com/0.100.2/">Materialize</a> version 0.100.2.</p>
+        <p>Heavy lifting (game stuff) is done in simple <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript.</a></p>
+        <p>If you click the button next to this one in the navigation bar, it is handled in the backend using <a href="https://www.npmjs.com/package/gmail-send">gmail-send.</a></p>
       </div>
-      <div class="modal-footer">
-        <a class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+      <div class="modal-footer blue lighten-5">
+        <a class="modal-action modal-close waves-effect waves-green btn-flat">Ok</a>
       </div>
     </div>
 
-    <div id="about" class="modal">
-      <div class="modal-content">
-        <h1>About</h1>
+    <div id="emailMe" class="modal">
+      <div class="modal-content blue lighten-5">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">person</i>
+              <input placeholder="A Name" id="name" type="text" class="validate">
+              <label for="name">Name</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">email</i>
+              <input placeholder="name@example.com" id="email" type="email" class="validate">
+              <label for="email">Email address</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">forum</i>
+              <textarea placeholder="Howdy!" id="subjectArea" class="materialize-textarea" data-length="30"></textarea>
+              <label for="subjectArea">Subject</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">edit</i>
+              <textarea placeholder="Your site is handy!" id="messageArea" class="materialize-textarea" data-length="200"></textarea>
+              <label for="messageArea">Message</label>
+            </div>
+          </div>
+        </form>
+
       </div>
-      <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+      <div class="modal-footer blue lighten-5">
+        <a class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
       </div>
     </div>
 

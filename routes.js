@@ -18,6 +18,10 @@ router.get('/', function(req, res) {
   res.sendFile(views + '/index.html')
 })
 
+router.post('/send', function(req, res) {
+  return(req.body)
+})
+
 router.get('*', function(req,res) {
   res.sendFile(views +  '/404.html')
 })
