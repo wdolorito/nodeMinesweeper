@@ -480,6 +480,10 @@ $('.tsImg').click(function() {
   refreshTileSet()
 })
 
+$('#submit').click(function() {
+  console.log('clicked')
+})
+
 /*
  * Initial page creation
  *
