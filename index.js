@@ -6,7 +6,7 @@ const bodyParser = require("body-parser")
 const fs = require('fs')
 let port = 3000
 app.use(express.static(__dirname + '/static'))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 try {
   port = fs.readFileSync(__dirname + '/port', 'utf8')

@@ -41,7 +41,7 @@
         <h4>What the heck is this?</h4>
         <p>This site is served using <a href="https://nodejs.org/en/">Node</a> and the <a href="https://expressjs.com/">Express</a> framework.</p>
         <p>Styling provided by <a href="http://archives.materializecss.com/0.100.2/">Materialize</a> version 0.100.2.</p>
-        <p>Heavy lifting (game stuff) is done in simple <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript.</a></p>
+        <p>Heavy lifting (game stuff) is done in simple <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a> and <a href="https://jquery.com/">jQuery</a>.</p>
         <p>If you click the button next to this one in the navigation bar, it is handled in the backend using <a href="https://www.npmjs.com/package/gmail-send">gmail-send.</a></p>
       </div>
       <div class="modal-footer blue lighten-5">
@@ -49,44 +49,42 @@
       </div>
     </div>
 
-    <div id="emailMe" class="modal">
-      <div class="modal-content blue lighten-5">
-        <form method="post" action="/" class="col s12">
+    <div id="emailMe" class="modal blue lighten-5">
+      <div class="modal-content">
+        <form class="col s12">
           <div class="row">
             <div class="input-field col s12">
               <i class="material-icons prefix">person</i>
-              <input placeholder="A Name" id="name" type="text" class="validate">
+              <input placeholder="A Name" id="name" name="name" type="text">
               <label for="name">Name</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s12">
               <i class="material-icons prefix">email</i>
-              <input placeholder="name@example.com" id="email" type="email" class="validate">
+              <input placeholder="name@example.com" id="email" name="email" type="email">
               <label for="email">Email address</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s12">
               <i class="material-icons prefix">forum</i>
-              <textarea placeholder="Howdy!" id="subjectArea" class="materialize-textarea" data-length="30"></textarea>
+              <textarea placeholder="Howdy!" id="subjectArea" name="subjectArea" class="materialize-textarea"></textarea>
               <label for="subjectArea">Subject</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s12">
               <i class="material-icons prefix">edit</i>
-              <textarea placeholder="Your site is handy!" id="messageArea" class="materialize-textarea" data-length="200"></textarea>
+              <textarea placeholder="Your site is handy!" id="messageArea" name="messageArea" class="materialize-textarea"></textarea>
               <label for="messageArea">Message</label>
             </div>
           </div>
-          <div class="row">
-            <button id="submit" type="submit" class="btn waves-effect waves-light blue accent-1">send<i class="material-icons right">send</i></button>
+          <div class="row right">
+            <a class="modal-action modal-close btn waves-effect waves-light blue accent-1">Cancel<i class="material-icons right">close</i></a>
+            <a id="sender" class="btn waves-effect waves-light blue accent-1">send<i class="material-icons right">send</i></a>
           </div>
         </form>
-      </div>
-      <div class="modal-footer blue lighten-5">
-        <a class="modal-action modal-close btn waves-effect waves-light blue accent-1">Cancel<i class="material-icons right">close</i></a>
       </div>
     </div>
 

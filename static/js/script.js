@@ -480,8 +480,41 @@ $('.tsImg').click(function() {
   refreshTileSet()
 })
 
-$('#submit').click(function() {
-  console.log('clicked')
+$('#sender').click(function() {
+  let name = $('#name').val()
+  let email = $('#email').val()
+  let subject = $('#subjectArea').val()
+  let message = $('#messageArea').val()
+  if(name && email && subject && message) {
+    console.log('clicked')
+    data = $('form').serialize()
+    $.ajax({
+      url: '/',
+      type: 'post',
+      data: data,
+      success: function() {
+        $('.modal').modal('close')
+        alert('Thank you for the message ' + name)
+        $('form').trigger('reset')
+      }
+    })
+  } else {
+    let msg = 'Please fill in your '
+    if(!name) msg += '1Name2 '
+    if(!email) msg += '1Email Address2 '
+    if(!subject) msg += '1Subject2 '
+    if(!message) msg += '1Message2 '
+    msg = msg.trim()
+    let count = (msg.match(/1/g) || []).length
+    if(count > 1) {
+      msg = msg.replace(/1/g, '')
+      msg += '.'
+    } else {
+      msg = msg.replace(/1/g, '')
+      msg = msg.replace(/2/g, '.')
+    }
+    alert(msg)
+  }
 })
 
 /*
