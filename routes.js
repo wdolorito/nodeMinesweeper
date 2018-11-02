@@ -19,8 +19,22 @@ router.get('/', function(req, res) {
 })
 
 router.post('/', function(req, res) {
+  let name = req.body.name
+  let email = req.body.email
+  let subject = req.body.subjectArea
+  let message = req.body.messageArea
   console.log(req.body)
-  res.send(req.body)
+  console.log('sending email from ' + name + ' with address: ' + email)
+
+  send({
+    replyTo: email,
+    subject: subject,
+    text:    name + ' has sent a message:\n\n' + message
+  }, function (err, res) {
+    console.log('send() callback returned: err:', err, '; res:', res);
+  })
+
+  res.send(true)
 })
 
 router.get('*', function(req,res) {
