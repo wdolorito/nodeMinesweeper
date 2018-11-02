@@ -495,7 +495,7 @@ $('#sender').click(function() {
       data: data,
       success: function() {
         $('.modal').modal('close')
-        alert('Thank you for the message ' + name)
+        alert('Thank you for the message ' + name + '!')
         $('form').trigger('reset')
       }
     })
