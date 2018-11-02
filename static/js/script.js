@@ -482,7 +482,8 @@ $('.tsImg').click(function() {
 
 $('#sender').click(function() {
   let name = $('#name').val()
-  let email = $('#email').val()
+  let email = ''
+  if($('#email').hasClass('valid')) email = $('#email').val()
   let subject = $('#subjectArea').val()
   let message = $('#messageArea').val()
   if(name && email && subject && message) {
@@ -506,12 +507,22 @@ $('#sender').click(function() {
     if(!message) msg += '1Message2 '
     msg = msg.trim()
     let count = (msg.match(/1/g) || []).length
-    if(count > 1) {
-      msg = msg.replace(/1/g, '')
-      msg += '.'
-    } else {
-      msg = msg.replace(/1/g, '')
-      msg = msg.replace(/2/g, '.')
+    switch(count) {
+      case 2:
+      case 3:
+        msg = msg.replace(/1/g, '')
+        msg = msg.replace(/2/g, ',')
+        msg = msg.substr(0, msg.length - 1) + '.'
+        let lastComma = msg.lastIndexOf(',')
+        msg = msg.substr(0, lastComma) + ' and' + msg.substr(++lastComma)
+        break
+      case 4:
+        msg = 'You didn\'t fill anything out.  Try again.'
+        break
+      default:
+        msg = msg.replace(/1/g, '')
+        msg = msg.replace(/2/g, '.')
+        break
     }
     alert(msg)
   }
