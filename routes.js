@@ -2,6 +2,13 @@ const express = require('express');
 const router = express.Router();
 const views = __dirname + '/views'
 
+// generate app specific password at https://myaccount.google.com/apppasswords
+// create gmail-credentials.json with the following:
+// {
+//   "user": "aUser@gmail.com",
+//   "pass": "abcdefghijklmnop"
+// }
+
 const credentials = require(__dirname + '/gmail-credentials.json')
 const send = require('gmail-send')({
   user: credentials.user,
