@@ -24,7 +24,7 @@ let tileset = baseassetpath + 'set1/'
 
 let gametimer = null
 let timecount = 0
-let minesInPlay = 0
+let minesinplay = 0
 let minesFull = false
 let initGame = 'novice'
 let gameRunning = false
@@ -166,9 +166,9 @@ const populateGameState = game => {
   let rows = game.rows
   let cols = game.columns
   let mines = game.mines
-  minesInPlay = 0
+  minesinplay = 0
   $('#mineTotal').html(mines)
-  $('#minesInPlay').html(minesInPlay)
+  $('#minesInPlay').html(minesinplay)
   gameState = Array(rows)
   for(let row = 0; row < rows; row++) {
     gameState[row] = Array(cols)
@@ -261,34 +261,34 @@ const returnMineCount = (x, y) => {
 
 const toggleFlag = tile => {
   let mines = game.mines
-  if(minesInPlay <= mines) {
+  if(minesinplay <= mines) {
     let currImg = $(tile).attr('src')
     let lastSlash = currImg.lastIndexOf('/')
     let baseImg = currImg.substr(lastSlash + 1)
     switch(baseImg) {
       case 'default.png':
         if(!minesFull) {
-          minesInPlay++
-          if(minesInPlay > mines) minesInPlay = mines
-          $(tile).attr('src', tileSet + pics.flag)
+          minesinplay++
+          if(minesinplay > mines) minesinplay = mines
+          $(tile).attr('src', tileset + pics.flag)
           $(tile).removeAttr('checked')
         }
-        if(minesInPlay === mines) {
+        if(minesinplay === mines) {
           minesFull = true
         } else {
           minesFull = false
         }
         break
       case 'flag.png':
-        minesInPlay--
-        $(tile).attr('src', tileSet + pics.default)
+        minesinplay--
+        $(tile).attr('src', tileset + pics.default)
         $(tile).removeAttr('checked')
-        if(minesInPlay < 0) minesInPlay = 0
+        if(minesinplay < 0) minesinplay = 0
         break
       default:
     }
   }
-  $('#minesInPlay').html(minesInPlay)
+  $('#minesInPlay').html(minesinplay)
 }
 
 /*
