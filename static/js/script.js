@@ -86,15 +86,15 @@ const setupTimer = () => {
  */
 
 const validateGame = () => {
-  let expected = (game.rows * game.columns) - game.mines
-  let checked = $(document).find('.game img[checked]').length
+  const expected = (game.rows * game.columns) - game.mines
+  const checked = $(document).find('.game img[checked]').length
   if(checked === expected) winGame()
 }
 
 const loseGame = () => {
   endGame()
   disableTiles()
-  alert('you lost')
+  alert('You lost :(')
 }
 
 const winGame = () => {
