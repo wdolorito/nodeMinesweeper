@@ -75,7 +75,7 @@ const resetTimer = () => {
 
 const setupTimer = () => {
   gameRunning = true
-  gametimer = setInterval(function() {
+  gametimer = setInterval(() => {
     timecount++
     $('#gameTimer').html(timecount)
   }, 1000)
@@ -114,7 +114,7 @@ const setTileSet = set => {
 }
 
 const refreshTileSet = () => {
-  $(document).find('.game img').each(function() {
+  $(document).find('.game img').each(() => {
     let currImg = $(this).attr('src')
     let lastSlash = currImg.lastIndexOf('/')
     let baseImg = currImg.substr(lastSlash + 1)
@@ -124,7 +124,7 @@ const refreshTileSet = () => {
 }
 
 const disableTiles = () => {
-  $(document).find('.game img').each(function() {
+  $(document).find('.game img').each(() => {
     $(this).removeClass('tileImg')
     $(this).addClass('tile')
   })
@@ -408,55 +408,55 @@ window.addEventListener('contextmenu', e => {
  *
  */
 
-$(document).on('mousedown', '.tileImg', function(e) {
+$(document).on('mousedown', '.tileImg', e => {
   switch (e.which) {
     case 1:
-      let xpos = $(this).attr('xpos')
-      let ypos = $(this).attr('ypos')
-      revealTile($(this))
+      let xpos = $(e.currentTarget).attr('xpos')
+      let ypos = $(e.currentTarget).attr('ypos')
+      revealTile($(e.currentTarget))
       break
     case 2:
       break
     case 3:
-      toggleFlag($(this))
+      toggleFlag($(e.currentTarget))
       break
     default:
   }
 })
 
-$('#ddDifficulty > li').click(function () {
-  let diffStr = $(this).find('a').html()
-  let lidx = diffStr.lastIndexOf('>')
-  let diff = diffStr.substr(lidx + 1)
+$('#ddDifficulty > li').click(e => {
+  const diffstr = $(e.currentTarget).find('a').html()
+  const lidx = diffstr.lastIndexOf('>')
+  const diff = diffstr.substr(lidx + 1)
   $('#ddDiffTop').html(diff)
 })
 
-$('.diff').click(function() {
-  endGame()
-  resetTimer()
-  returnInitialGameBoard($(this).attr('difficulty').trim())
-  refreshTileSet()
+$('.diff').click(e => {
+  // endGame()
+  // resetTimer()
+  // returnInitialGameBoard($(this).attr('difficulty').trim())
+  // refreshTileSet()
 })
 
-$('.tsImg').click(function() {
-  setTileSet($(this).attr('tileSet'))
-  refreshTileSet()
+$('.tsImg').click(e => {
+  // setTileSet($(e.currentTarget).attr('tileSet'))
+  // refreshTileSet()
 })
 
-$('#sender').click(function() {
-  let name = $('#name').val()
+$('#sender').click(e => {
+  const name = $('#name').val()
   let email = ''
   if($('#email').hasClass('valid')) email = $('#email').val()
-  let subject = $('#subjectArea').val()
-  let message = $('#messageArea').val()
+  const subject = $('#subjectArea').val()
+  const message = $('#messageArea').val()
+
   if(name && email && subject && message) {
-    console.log('clicked')
     data = $('form').serialize()
     $.ajax({
       url: '/',
       type: 'post',
       data: data,
-      success: function() {
+      success: () => {
         $('.modal').modal('close')
         alert('Thank you for the message ' + name + '!')
         $('form').trigger('reset')
@@ -469,15 +469,15 @@ $('#sender').click(function() {
     if(!subject) msg += '1Subject2 '
     if(!message) msg += '1Message2 '
     msg = msg.trim()
-    let count = (msg.match(/1/g) || []).length
+    const count = (msg.match(/1/g) || []).length
     switch(count) {
       case 2:
       case 3:
         msg = msg.replace(/1/g, '')
         msg = msg.replace(/2/g, ',')
         msg = msg.substr(0, msg.length - 1) + '.'
-        let lastComma = msg.lastIndexOf(',')
-        msg = msg.substr(0, lastComma) + ' and' + msg.substr(++lastComma)
+        let lastcomma = msg.lastIndexOf(',')
+        msg = msg.substr(0, lastcomma) + ' and' + msg.substr(++lastcomma)
         break
       case 4:
         msg = 'You didn\'t fill anything out.  Try again.'
@@ -496,7 +496,7 @@ $('#sender').click(function() {
  *
  */
 
-$(document).ready(function () {
+$(document).ready(() => {
   $('.modal').modal()
   $('.button-collapse').sideNav()
   $('#ddDiffTop').html(initgame)

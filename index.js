@@ -17,6 +17,6 @@ try {
 
 app.use('/', router)
 
-server.listen(port, function() {
+server.listen(port, () => {
   console.log('Live at Port ' + port)
 })

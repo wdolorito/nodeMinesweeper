@@ -16,16 +16,16 @@ const send = require('gmail-send')({
   to:   credentials.user,
 })
 
-router.use(function (req, res, next) {
+router.use((req, res, next) => {
   console.log(Date() + ' ' + req.path + ' ' + req.method)
   next()
 })
 
-router.get('/', function(req, res) {
+router.get('/', (req, res) => {
   res.sendFile(views + '/index.html')
 })
 
-router.post('/', function(req, res) {
+router.post('/', (req, res) => {
   let name = req.body.name
   let email = req.body.email
   let subject = req.body.subjectArea
@@ -37,14 +37,14 @@ router.post('/', function(req, res) {
     replyTo: email,
     subject: subject,
     text:    name + ' has sent a message:\n\n' + message
-  }, function (err, res) {
+  }, (err, res) => {
     console.log('send() callback returned: err:', err, '; res:', res);
   })
 
   res.send(true)
 })
 
-router.get('*', function(req,res) {
+router.get('*', (req,res) => {
   res.sendFile(views +  '/404.html')
 })
 
