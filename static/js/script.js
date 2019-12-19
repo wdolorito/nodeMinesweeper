@@ -26,7 +26,7 @@ let gametimer = null
 let timecount = 0
 let minesinplay = 0
 let minesFull = false
-let initGame = 'novice'
+let initgame = 'novice'
 let gameRunning = false
 let game = {}
 let games = []
@@ -499,6 +499,6 @@ $('#sender').click(function() {
 $(document).ready(function () {
   $('.modal').modal()
   $('.button-collapse').sideNav()
-  $('#ddDiffTop').html(initGame)
-  returnInitialGameBoard(initGame)
+  $('#ddDiffTop').html(initgame)
+  returnInitialGameBoard(initgame)
 })
