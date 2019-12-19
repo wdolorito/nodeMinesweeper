@@ -85,19 +85,19 @@ const setupTimer = () => {
  *
  */
 
-const validateGame = function() {
+const validateGame = () => {
   let expected = (game.rows * game.columns) - game.mines
   let checked = $(document).find('.game img[checked]').length
   if(checked === expected) winGame()
 }
 
-const loseGame = function() {
+const loseGame = () => {
   endGame()
   disableTiles()
   alert('you lost')
 }
 
-const winGame = function() {
+const winGame = () => {
   endGame()
   disableTiles()
   alert('You won!\nScore: ' + timeCount)
@@ -108,11 +108,11 @@ const winGame = function() {
  *
  */
 
-const setTileSet = function(set) {
+const setTileSet = set => {
   tileSet = baseAssetPath + set
 }
 
-const refreshTileSet = function() {
+const refreshTileSet = () => {
   $(document).find('.game img').each(function() {
     let currImg = $(this).attr('src')
     let lastSlash = currImg.lastIndexOf('/')
@@ -122,7 +122,7 @@ const refreshTileSet = function() {
   })
 }
 
-const disableTiles = function() {
+const disableTiles = () => {
   $(document).find('.game img').each(function() {
     $(this).removeClass('tileImg')
     $(this).addClass('tile')
@@ -134,7 +134,7 @@ const disableTiles = function() {
  *
  */
 
-const returnInitialGameBoard = function(diff) {
+const returnInitialGameBoard = diff => {
   let html = ''
   switch(diff) {
     case 'novice':
@@ -160,7 +160,7 @@ const returnInitialGameBoard = function(diff) {
   $('.game').html(html)
 }
 
-const populateGameState = function(game) {
+const populateGameState = game => {
   let len = game.rows * game.columns
   let rows = game.rows
   let cols = game.columns
@@ -188,7 +188,7 @@ const populateGameState = function(game) {
   addMineCounts()
 }
 
-const addMineCounts = function() {
+const addMineCounts = () => {
   let rows = gameState.length
   let cols = gameState[0].length
   for(let row = 0; row < rows; row++) {
@@ -198,7 +198,7 @@ const addMineCounts = function() {
   }
 }
 
-const returnMineCount = function(x, y) {
+const returnMineCount = (x, y) => {
   let counter = 0
   // check top left
   if(gameState[x - 1] !== undefined) {
@@ -258,7 +258,7 @@ const returnMineCount = function(x, y) {
   return counter
 }
 
-const toggleFlag = function(tile) {
+const toggleFlag = tile => {
   let mines = game.mines
   if(minesInPlay <= mines) {
     let currImg = $(tile).attr('src')
@@ -295,7 +295,7 @@ const toggleFlag = function(tile) {
  *
  */
 
-const revealTile = function(tile) {
+const revealTile = tile => {
   if(!gameRunning) startGame()
   let xpos = parseInt($(tile).attr('xpos'))
   let ypos = parseInt($(tile).attr('ypos'))
