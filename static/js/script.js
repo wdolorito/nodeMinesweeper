@@ -203,61 +203,63 @@ const addMineCounts = () => {
   }
 }
 
-const returnMineCount = (x, y) => {
+const returnMineCount = (row, col) => {
+
+  /*
+   *       c1   c2   c3
+   *
+   * r1    tl   t    tr
+   * r2    l    x    r
+   * r3    bl   b    br
+   *
+   */
+
   let counter = 0
   // check top left
-  if(gamestate[x - 1] !== undefined) {
-    if(gamestate[x - 1][y - 1] !== undefined) {
-      if(gamestate[x - 1][y - 1] == 'x') counter++
+  if(gamestate[row - 1] !== undefined) {
+    if(gamestate[row - 1][col - 1] !== undefined) {
+      if(gamestate[row - 1][col - 1] == 'x') counter++
     }
   }
 
   // check top
-  if(gamestate[x] !== undefined) {
-    if(gamestate[x][y - 1] !== undefined) {
-      if(gamestate[x][y - 1] == 'x') counter++
-    }
+  if(gamestate[row - 1] !== undefined) {
+    if(gamestate[row - 1][col] == 'x') counter++
   }
 
   // check top right
-  if(gamestate[x + 1] !== undefined) {
-    if(gamestate[x + 1][y - 1] !== undefined) {
-      if(gamestate[x + 1][y - 1] == 'x') counter++
+  if(gamestate[row - 1] !== undefined) {
+    if(gamestate[row - 1][col + 1] !== undefined) {
+      if(gamestate[row - 1][col + 1] == 'x') counter++
     }
   }
 
   // check left
-  if(gamestate[x - 1] !== undefined) {
-    if(gamestate[x - 1][y] !== undefined) {
-      if(gamestate[x - 1][y] == 'x') counter++
-    }
+  if(gamestate[row][col - 1] !== undefined) {
+    if(gamestate[row][col - 1] == 'x') counter++
   }
 
   // check right
-  if(gamestate[x + 1] !== undefined) {
-    if(gamestate[x + 1][y] !== undefined) {
-      if(gamestate[x + 1][y] == 'x') counter++
-    }
+  if(gamestate[row][col + 1] !== undefined) {
+    if(gamestate[row][col + 1] == 'x') counter++
   }
 
   // check bottom left
-  if(gamestate[x - 1] !== undefined) {
-    if(gamestate[x - 1][y + 1] !== undefined) {
-      if(gamestate[x - 1][y + 1] == 'x') counter++
+  if(gamestate[row + 1] !== undefined) {
+    if(gamestate[row + 1][col - 1] !== undefined) {
+      if(gamestate[row + 1][col - 1] == 'x') counter++
     }
   }
 
   // check bottom
-  if(gamestate[x] !== undefined) {
-    if(gamestate[x][y + 1] !== undefined) {
-      if(gamestate[x][y + 1] == 'x') counter++
-    }
+  if(gamestate[row + 1] !== undefined) {
+    if(gamestate[row + 1][col] == 'x') counter++
   }
 
   // check bottom right
-  if(gamestate[x + 1] !== undefined) {
-    if(gamestate[x + 1][y + 1] !== undefined) {
-      if(gamestate[x + 1][y + 1] == 'x') counter++
+  if(gamestate[row + 1] !== undefined) {
+    if(gamestate[row + 1][col + 1] !== undefined) {
+      if(gamestate[row + 1][col + 1] == 'x') counter++
     }
   }
   return counter
