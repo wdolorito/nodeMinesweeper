@@ -55,24 +55,24 @@ games.push(expert)
  *
  */
 
-const startGame = function() {
+const startGame = () => {
   if(!gameTimer) {
     setupTimer()
   }
 }
 
-const endGame  = function() {
+const endGame  = () => {
   gameRunning = false
   clearInterval(gameTimer)
   gameTimer = null
 }
 
-const resetTimer = function() {
+const resetTimer = () => {
   timeCount = 0
   $('#gameTimer').html(timeCount)
 }
 
-const setupTimer = function() {
+const setupTimer = () => {
   gameRunning = true
   gameTimer = setInterval(function() {
     timeCount++
