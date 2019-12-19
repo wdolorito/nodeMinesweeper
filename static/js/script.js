@@ -203,96 +203,56 @@ const returnMineCount = function(x, y) {
   // check top left
   if(gameState[x - 1] !== undefined) {
     if(gameState[x - 1][y - 1] !== undefined) {
-      switch(gameState[x - 1][y - 1]) {
-        case 'x':
-          counter++
-          break
-        default:
-      }
+      if(gameState[x - 1][y - 1] == 'x') counter++
     }
   }
 
   // check top
   if(gameState[x] !== undefined) {
     if(gameState[x][y - 1] !== undefined) {
-      switch(gameState[x][y - 1]) {
-        case 'x':
-          counter++
-          break
-        default:
-      }
+      if(gameState[x][y - 1] == 'x') counter++
     }
   }
 
   // check top right
   if(gameState[x + 1] !== undefined) {
     if(gameState[x + 1][y - 1] !== undefined) {
-      switch(gameState[x + 1][y - 1]) {
-        case 'x':
-          counter++
-          break
-        default:
-      }
+      if(gameState[x + 1][y - 1] == 'x') counter++
     }
   }
 
   // check left
   if(gameState[x - 1] !== undefined) {
     if(gameState[x - 1][y] !== undefined) {
-      switch(gameState[x - 1][y]) {
-        case 'x':
-          counter++
-          break
-        default:
-      }
+      if(gameState[x - 1][y] == 'x') counter++
     }
   }
 
   // check right
   if(gameState[x + 1] !== undefined) {
     if(gameState[x + 1][y] !== undefined) {
-      switch(gameState[x + 1][y]) {
-        case 'x':
-          counter++
-          break
-        default:
-      }
+      if(gameState[x + 1][y] == 'x') counter++
     }
   }
 
   // check bottom left
   if(gameState[x - 1] !== undefined) {
     if(gameState[x - 1][y + 1] !== undefined) {
-      switch(gameState[x - 1][y + 1]) {
-        case 'x':
-          counter++
-          break
-        default:
-      }
+      if(gameState[x - 1][y + 1] == 'x') counter++
     }
   }
 
   // check bottom
   if(gameState[x] !== undefined) {
     if(gameState[x][y + 1] !== undefined) {
-      switch(gameState[x][y + 1]) {
-        case 'x':
-          counter++
-          break
-        default:
-      }
+      if(gameState[x][y + 1] == 'x') counter++
     }
   }
 
   // check bottom right
   if(gameState[x + 1] !== undefined) {
     if(gameState[x + 1][y + 1] !== undefined) {
-      switch(gameState[x + 1][y + 1]) {
-        case 'x':
-          counter++
-          break
-        default:
-      }
+      if(gameState[x + 1][y + 1] == 'x') counter++
     }
   }
   return counter
@@ -434,11 +394,11 @@ const revealTile = function(tile) {
  * Disable right click menu
  */
 
-document.oncontextmenu = function () { // IE8 compatibility
+document.oncontextmenu = () => { // IE8 compatibility
   return false
 }
 
-window.addEventListener('contextmenu', function (e) {
+window.addEventListener('contextmenu', e => {
   e.preventDefault()
 }, false)
 
