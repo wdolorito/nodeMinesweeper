@@ -29,27 +29,25 @@ let minesFull = false
 let initgame = 'novice'
 let gameRunning = false
 let game = {}
-let games = []
-let novice = {
+let gameState = []
+
+const novice = {
   mines: 10,
   rows: 9,
   columns: 9
 }
-let intermediate = {
+const intermediate = {
   mines: 40,
   rows: 16,
   columns: 16
 }
-let expert = {
+const expert = {
   mines: 99,
   rows: 16,
   columns: 30
 }
-let gameState = []
 
-games.push(novice)
-games.push(intermediate)
-games.push(expert)
+const games = [novice, intermediate, expert]
 
 /*
  * Game control functions
@@ -114,20 +112,26 @@ const setTileSet = set => {
 }
 
 const refreshTileSet = () => {
-  $(document).find('.game img').each(() => {
-    let currImg = $(this).attr('src')
-    let lastSlash = currImg.lastIndexOf('/')
-    let baseImg = currImg.substr(lastSlash + 1)
-    let newImg = tileset + baseImg
-    $(this).attr('src', newImg)
-  })
+  const elems = $(document).find('.game img')
+  const len = elems.length
+  for(let count = 0; count < len; count++) {
+    const curr = elems[count]
+    const currimg = $(curr).attr('src')
+    const lastslash = currimg.lastIndexOf('/')
+    const baseimg = currimg.substr(lastslash + 1)
+    const newimg = tileset + baseimg
+    $(curr).attr('src', newimg)
+  }
 }
 
 const disableTiles = () => {
-  $(document).find('.game img').each(() => {
-    $(this).removeClass('tileImg')
-    $(this).addClass('tile')
-  })
+  const elems = $(document).find('.game img')
+  const len = elems.length
+  for(let count = 0; count < len; count++) {
+    const curr = elems[count]
+    $(curr).removeClass('tileImg')
+    $(curr).addClass('tile')
+  }
 }
 
 /*
@@ -149,8 +153,8 @@ const returnInitialGameBoard = diff => {
       break
     default:
   }
-  let rows = game.rows
-  let cols = game.columns
+  const rows = game.rows
+  const cols = game.columns
   for(let row = 0; row < rows; row++) {
     for(let col = 0; col < cols; col++) {
       html += '<img class="tileImg" src="' + tileset + pics.default + '" xpos="' + col +'" ypos="' + row + '"></img>'
@@ -162,10 +166,10 @@ const returnInitialGameBoard = diff => {
 }
 
 const populateGameState = game => {
-  let len = game.rows * game.columns
-  let rows = game.rows
-  let cols = game.columns
-  let mines = game.mines
+  const len = game.rows * game.columns
+  const rows = game.rows
+  const cols = game.columns
+  const mines = game.mines
   minesinplay = 0
   $('#mineTotal').html(mines)
   $('#minesInPlay').html(minesinplay)
@@ -177,9 +181,9 @@ const populateGameState = game => {
     }
   }
   for(let count = 0; count < mines; count++) {
-    let random = Math.floor(Math.random() * len)
-    let x = Math.floor(random / cols)
-    let y = random % cols
+    const random = Math.floor(Math.random() * len)
+    const x = Math.floor(random / cols)
+    const y = random % cols
     if(gameState[x][y] === 0) {
       gameState[x][y] = 'x'
     } else {
@@ -432,10 +436,10 @@ $('#ddDifficulty > li').click(e => {
 })
 
 $('.diff').click(e => {
-  // endGame()
-  // resetTimer()
-  // returnInitialGameBoard($(this).attr('difficulty').trim())
-  // refreshTileSet()
+  endGame()
+  resetTimer()
+  returnInitialGameBoard($(e.currentTarget).attr('difficulty').trim())
+  refreshTileSet()
 })
 
 $('.tsImg').click(e => {
