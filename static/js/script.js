@@ -97,9 +97,10 @@ const validateGame = () => {
   if(checked === expected) winGame()
 }
 
-const loseGame = () => {
+const loseGame = (row, col) => {
   endGame()
   disableTiles()
+  revealMines(row, col)
   alert('You lost :(')
 }
 
@@ -398,11 +399,30 @@ const revealTile = tile => {
       $(tile).attr('src', basepath + pics.exploded)
       $(tile).removeClass('tileImg')
       $(tile).addClass('tile')
-      loseGame()
+      loseGame(row, col)
       break
     default:
   }
   validateGame()
+}
+
+const revealMines = (erow, ecol) => {
+  const rows = gamestate.length
+  const cols = gamestate[0].length
+  for(let row = 0; row < rows; row++) {
+    for(let col = 0; col < cols; col++) {
+      if(row !== erow && col !== ecol) {
+        const val = gamestate[row][col]
+        if(val === 'x') {
+          const mine = $('img[row="' + row + '"][col="' + col + '"]')
+          const currimg = $(mine).attr('src')
+          const lastslash = currimg.lastIndexOf('/')
+          const basepath = currimg.substr(0, lastslash + 1)
+          $(mine).attr('src', basepath + pics.bomb)
+        }
+      }
+    }
+  }
 }
 
 /*
