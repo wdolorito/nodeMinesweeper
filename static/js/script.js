@@ -20,7 +20,7 @@ const pics = {
              }
 
 const baseassetpath = '/assets/'
-let tileSet = baseassetpath + 'set1/'
+let tileset = baseassetpath + 'set1/'
 
 let gameTimer = null
 let timeCount = 0
@@ -110,7 +110,7 @@ const winGame = () => {
  */
 
 const setTileSet = set => {
-  tileSet = baseassetpath + set
+  tileset = baseassetpath + set
 }
 
 const refreshTileSet = () => {
@@ -118,7 +118,7 @@ const refreshTileSet = () => {
     let currImg = $(this).attr('src')
     let lastSlash = currImg.lastIndexOf('/')
     let baseImg = currImg.substr(lastSlash + 1)
-    let newImg = tileSet + baseImg
+    let newImg = tileset + baseImg
     $(this).attr('src', newImg)
   })
 }
@@ -153,7 +153,7 @@ const returnInitialGameBoard = diff => {
   let cols = game.columns
   for(let row = 0; row < rows; row++) {
     for(let col = 0; col < cols; col++) {
-      html += '<img class="tileImg" src="' + tileSet + pics.default + '" xpos="' + col +'" ypos="' + row + '"></img>'
+      html += '<img class="tileImg" src="' + tileset + pics.default + '" xpos="' + col +'" ypos="' + row + '"></img>'
     }
     html += '<br />\n'
   }
