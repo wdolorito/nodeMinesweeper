@@ -3,22 +3,24 @@
  *
  */
 
-let pics = {}
-pics.one = '1.png'
-pics.two = '2.png'
-pics.three = '3.png'
-pics.four = '4.png'
-pics.five = '5.png'
-pics.six = '6.png'
-pics.seven = '7.png'
-pics.eight = '8.png'
-pics.bomb = 'bomb.png'
-pics.default = 'default.png'
-pics.empty = 'empty.png'
-pics.exploded = 'explode.png'
-pics.flag = 'flag.png'
-let baseAssetPath = '/assets/'
+const pics = {
+               one:       '1.png',
+               two:       '2.png',
+               three:     '3.png',
+               four:      '4.png',
+               five:      '5.png',
+               six:       '6.png',
+               seven:     '7.png',
+               eight:     '8.png',
+               bomb:      'bomb.png',
+               default:   'default.png',
+               empty:     'empty.png',
+               exploded:  'explode.png',
+               flag:      'flag.png'
+             }
+const baseAssetPath = '/assets/'
 let tileSet = baseAssetPath + 'set1/'
+
 let gameTimer = null
 let timeCount = 0
 let minesInPlay = 0
