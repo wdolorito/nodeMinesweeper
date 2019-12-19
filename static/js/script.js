@@ -18,8 +18,9 @@ const pics = {
                exploded:  'explode.png',
                flag:      'flag.png'
              }
-const baseAssetPath = '/assets/'
-let tileSet = baseAssetPath + 'set1/'
+
+const baseassetpath = '/assets/'
+let tileSet = baseassetpath + 'set1/'
 
 let gameTimer = null
 let timeCount = 0
@@ -109,7 +110,7 @@ const winGame = () => {
  */
 
 const setTileSet = set => {
-  tileSet = baseAssetPath + set
+  tileSet = baseassetpath + set
 }
 
 const refreshTileSet = () => {
