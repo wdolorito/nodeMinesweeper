@@ -1,5 +1,5 @@
 /*
- * Basic variable initialization
+ * Constant global variable initialization
  *
  */
 
@@ -15,22 +15,11 @@ const pics = {
                bomb:      'bomb.png',
                default:   'default.png',
                empty:     'empty.png',
-               exploded:  'explode.png',
+               exploded:  'exploded.png',
                flag:      'flag.png'
              }
 
 const baseassetpath = '/assets/'
-let tileset = baseassetpath + 'set1/'
-
-let gametimer = null
-let timecount = 0
-let gamerunning = false
-
-let minesinplay = 0
-let minesFull = false
-let initgame = 'novice'
-let game = {}
-let gamestate = []
 
 const novice = {
   mines: 10,
@@ -49,6 +38,23 @@ const expert = {
 }
 
 const games = [novice, intermediate, expert]
+
+/*
+ * Reuseable global variable initialization
+ *
+ */
+
+let tileset = baseassetpath + 'set1/'
+
+let gametimer = null
+let timecount = 0
+let gamerunning = false
+
+let minesinplay = 0
+let minesFull = false
+let initgame = 'novice'
+let game = {}
+let gamestate = []
 
 /*
  * Game timer control functions
@@ -158,7 +164,7 @@ const returnInitialGameBoard = diff => {
   const cols = game.columns
   for(let row = 0; row < rows; row++) {
     for(let col = 0; col < cols; col++) {
-      html += '<img class="tileImg" src="' + tileset + pics.default + '" xpos="' + col +'" ypos="' + row + '"></img>'
+      html += '<img class="tileImg" src="' + tileset + pics.default + '" row="' + row +'" col="' + col + '"></img>'
     }
     html += '<br />\n'
   }
@@ -183,10 +189,10 @@ const populateGameState = game => {
   }
   for(let count = 0; count < mines; count++) {
     const random = Math.floor(Math.random() * len)
-    const x = Math.floor(random / cols)
-    const y = random % cols
-    if(gamestate[x][y] === 0) {
-      gamestate[x][y] = 'x'
+    const row = Math.floor(random / cols)
+    const col = random % cols
+    if(gamestate[row][col] === 0) {
+      gamestate[row][col] = 'x'
     } else {
       count--
     }
@@ -195,8 +201,8 @@ const populateGameState = game => {
 }
 
 const addMineCounts = () => {
-  let rows = gamestate.length
-  let cols = gamestate[0].length
+  const rows = gamestate.length
+  const cols = gamestate[0].length
   for(let row = 0; row < rows; row++) {
     for(let col = 0; col < cols; col++) {
       if(gamestate[row][col] !== 'x') gamestate[row][col] = returnMineCount(row, col)
@@ -305,90 +311,91 @@ const toggleFlag = tile => {
 
 const revealTile = tile => {
   if(!gamerunning) startGame()
-  let xpos = parseInt($(tile).attr('xpos'))
-  let ypos = parseInt($(tile).attr('ypos'))
+  const row = parseInt($(tile).attr('row'))
+  const col = parseInt($(tile).attr('col'))
 
-  let currImg = $(tile).attr('src')
-  let lastSlash = currImg.lastIndexOf('/')
-  let basePath = currImg.substr(0, lastSlash + 1)
+  const currimg = $(tile).attr('src')
+  const lastslash = currimg.lastIndexOf('/')
+  const basepath = currimg.substr(0, lastslash + 1)
 
-  let tileVal = gamestate[xpos][ypos]
-  switch(tileVal) {
+  const tileval = gamestate[row][col]
+  switch(tileval) {
     case 0:
-      $(tile).attr('src', basePath + pics.empty)
-      let toCheckArr = []
-      toCheckArr.push([xpos - 1, ypos - 1])
-      toCheckArr.push([xpos, ypos - 1])
-      toCheckArr.push([xpos + 1, ypos - 1])
-      toCheckArr.push([xpos - 1, ypos])
-      toCheckArr.push([xpos + 1, ypos])
-      toCheckArr.push([xpos - 1, ypos + 1])
-      toCheckArr.push([xpos , ypos + 1])
-      toCheckArr.push([xpos + 1, ypos + 1])
-      let len = toCheckArr.length
+      $(tile).attr('src', basepath + pics.empty)
+      let tocheckarr = []
+      tocheckarr.push([row - 1, col - 1])
+      tocheckarr.push([row, col - 1])
+      tocheckarr.push([row + 1, col - 1])
+      tocheckarr.push([row - 1, col])
+      tocheckarr.push([row + 1, col])
+      tocheckarr.push([row - 1, col + 1])
+      tocheckarr.push([row , col + 1])
+      tocheckarr.push([row + 1, col + 1])
+      const len = tocheckarr.length
       for(let count = 0; count < len; count++) {
-        let xpos = toCheckArr[count][0]
-        let ypos = toCheckArr[count][1]
-        let toCheckTile = $('img[xpos="' + xpos + '"][ypos="' + ypos + '"]')
-        if(toCheckTile.length) {
-          if(toCheckTile.attr('checked') === undefined) {
-            $(toCheckTile.attr('checked', 'true'))
+        const row = tocheckarr[count][0]
+        const col = tocheckarr[count][1]
+        const tochecktile = $('img[row="' + row + '"][col="' + col + '"]')
+        if(tochecktile.length) {
+          if(tochecktile.attr('checked') === undefined) {
+            $(tochecktile.attr('checked', 'true'))
             $(tile).removeClass('tileImg')
             $(tile).addClass('tile')
-            revealTile(toCheckTile)
+            revealTile(tochecktile)
           }
         }
       }
       break
     case 1:
-      $(tile).attr('src', basePath + pics.one)
+      $(tile).attr('src', basepath + pics.one)
       $(tile).attr('checked', 'true')
       $(tile).removeClass('tileImg')
       $(tile).addClass('tile')
       break
     case 2:
-      $(tile).attr('src', basePath + pics.two)
+      $(tile).attr('src', basepath + pics.two)
       $(tile).attr('checked', 'true')
       $(tile).removeClass('tileImg')
       $(tile).addClass('tile')
       break
     case 3:
-      $(tile).attr('src', basePath + pics.three)
+      $(tile).attr('src', basepath + pics.three)
       $(tile).attr('checked', 'true')
       $(tile).removeClass('tileImg')
       $(tile).addClass('tile')
       break
     case 4:
-      $(tile).attr('src', basePath + pics.four)
+      $(tile).attr('src', basepath + pics.four)
       $(tile).attr('checked', 'true')
       $(tile).removeClass('tileImg')
       $(tile).addClass('tile')
       break
     case 5:
-      $(tile).attr('src', basePath + pics.five)
+      $(tile).attr('src', basepath + pics.five)
       $(tile).attr('checked', 'true')
       $(tile).removeClass('tileImg')
       $(tile).addClass('tile')
       break
     case 6:
-      $(tile).attr('src', basePath + pics.six)
+      $(tile).attr('src', basepath + pics.six)
       $(tile).attr('checked', 'true')
       $(tile).removeClass('tileImg')
       $(tile).addClass('tile')
       break
     case 7:
-      $(tile).attr('src', basePath + pics.seven)
+      $(tile).attr('src', basepath + pics.seven)
       $(tile).attr('checked', 'true')
       $(tile).removeClass('tileImg')
       $(tile).addClass('tile')
       break
     case 8:
-      $(tile).attr('src', basePath + pics.eigth)
+      $(tile).attr('src', basepath + pics.eigth)
       $(tile).attr('checked', 'true')
       $(tile).removeClass('tileImg')
       $(tile).addClass('tile')
       break
     case 'x':
+      $(tile).attr('src', basepath + pics.exploded)
       $(tile).removeClass('tileImg')
       $(tile).addClass('tile')
       loseGame()
