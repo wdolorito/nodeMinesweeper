@@ -24,10 +24,11 @@ let tileset = baseassetpath + 'set1/'
 
 let gametimer = null
 let timecount = 0
+let gamerunning = false
+
 let minesinplay = 0
 let minesFull = false
 let initgame = 'novice'
-let gameRunning = false
 let game = {}
 let gamestate = []
 
@@ -50,7 +51,7 @@ const expert = {
 const games = [novice, intermediate, expert]
 
 /*
- * Game control functions
+ * Game timer control functions
  *
  */
 
@@ -61,7 +62,7 @@ const startGame = () => {
 }
 
 const endGame  = () => {
-  gameRunning = false
+  gamerunning = false
   clearInterval(gametimer)
   gametimer = null
 }
@@ -72,7 +73,7 @@ const resetTimer = () => {
 }
 
 const setupTimer = () => {
-  gameRunning = true
+  gamerunning = true
   gametimer = setInterval(() => {
     timecount++
     $('#gameTimer').html(timecount)
@@ -303,7 +304,7 @@ const toggleFlag = tile => {
  */
 
 const revealTile = tile => {
-  if(!gameRunning) startGame()
+  if(!gamerunning) startGame()
   let xpos = parseInt($(tile).attr('xpos'))
   let ypos = parseInt($(tile).attr('ypos'))
 
