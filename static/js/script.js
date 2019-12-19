@@ -23,7 +23,7 @@ const baseassetpath = '/assets/'
 let tileset = baseassetpath + 'set1/'
 
 let gametimer = null
-let timeCount = 0
+let timecount = 0
 let minesInPlay = 0
 let minesFull = false
 let initGame = 'novice'
@@ -69,15 +69,15 @@ const endGame  = () => {
 }
 
 const resetTimer = () => {
-  timeCount = 0
-  $('#gameTimer').html(timeCount)
+  timecount = 0
+  $('#gameTimer').html(timecount)
 }
 
 const setupTimer = () => {
   gameRunning = true
   gametimer = setInterval(function() {
-    timeCount++
-    $('#gameTimer').html(timeCount)
+    timecount++
+    $('#gameTimer').html(timecount)
   }, 1000)
 }
 
@@ -101,7 +101,7 @@ const loseGame = () => {
 const winGame = () => {
   endGame()
   disableTiles()
-  alert('You won!\nScore: ' + timeCount)
+  alert('You won!\nScore: ' + timecount)
 }
 
 /*
