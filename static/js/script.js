@@ -29,7 +29,7 @@ let minesFull = false
 let initgame = 'novice'
 let gameRunning = false
 let game = {}
-let gameState = []
+let gamestate = []
 
 const novice = {
   mines: 10,
@@ -173,19 +173,19 @@ const populateGameState = game => {
   minesinplay = 0
   $('#mineTotal').html(mines)
   $('#minesInPlay').html(minesinplay)
-  gameState = Array(rows)
+  gamestate = new Array(rows)
   for(let row = 0; row < rows; row++) {
-    gameState[row] = Array(cols)
+    gamestate[row] = new Array(cols)
     for(let col = 0; col < cols; col++) {
-      gameState[row][col] = 0
+      gamestate[row][col] = 0
     }
   }
   for(let count = 0; count < mines; count++) {
     const random = Math.floor(Math.random() * len)
     const x = Math.floor(random / cols)
     const y = random % cols
-    if(gameState[x][y] === 0) {
-      gameState[x][y] = 'x'
+    if(gamestate[x][y] === 0) {
+      gamestate[x][y] = 'x'
     } else {
       count--
     }
@@ -194,11 +194,11 @@ const populateGameState = game => {
 }
 
 const addMineCounts = () => {
-  let rows = gameState.length
-  let cols = gameState[0].length
+  let rows = gamestate.length
+  let cols = gamestate[0].length
   for(let row = 0; row < rows; row++) {
     for(let col = 0; col < cols; col++) {
-      if(gameState[row][col] !== 'x') gameState[row][col] = returnMineCount(row, col)
+      if(gamestate[row][col] !== 'x') gamestate[row][col] = returnMineCount(row, col)
     }
   }
 }
@@ -206,58 +206,58 @@ const addMineCounts = () => {
 const returnMineCount = (x, y) => {
   let counter = 0
   // check top left
-  if(gameState[x - 1] !== undefined) {
-    if(gameState[x - 1][y - 1] !== undefined) {
-      if(gameState[x - 1][y - 1] == 'x') counter++
+  if(gamestate[x - 1] !== undefined) {
+    if(gamestate[x - 1][y - 1] !== undefined) {
+      if(gamestate[x - 1][y - 1] == 'x') counter++
     }
   }
 
   // check top
-  if(gameState[x] !== undefined) {
-    if(gameState[x][y - 1] !== undefined) {
-      if(gameState[x][y - 1] == 'x') counter++
+  if(gamestate[x] !== undefined) {
+    if(gamestate[x][y - 1] !== undefined) {
+      if(gamestate[x][y - 1] == 'x') counter++
     }
   }
 
   // check top right
-  if(gameState[x + 1] !== undefined) {
-    if(gameState[x + 1][y - 1] !== undefined) {
-      if(gameState[x + 1][y - 1] == 'x') counter++
+  if(gamestate[x + 1] !== undefined) {
+    if(gamestate[x + 1][y - 1] !== undefined) {
+      if(gamestate[x + 1][y - 1] == 'x') counter++
     }
   }
 
   // check left
-  if(gameState[x - 1] !== undefined) {
-    if(gameState[x - 1][y] !== undefined) {
-      if(gameState[x - 1][y] == 'x') counter++
+  if(gamestate[x - 1] !== undefined) {
+    if(gamestate[x - 1][y] !== undefined) {
+      if(gamestate[x - 1][y] == 'x') counter++
     }
   }
 
   // check right
-  if(gameState[x + 1] !== undefined) {
-    if(gameState[x + 1][y] !== undefined) {
-      if(gameState[x + 1][y] == 'x') counter++
+  if(gamestate[x + 1] !== undefined) {
+    if(gamestate[x + 1][y] !== undefined) {
+      if(gamestate[x + 1][y] == 'x') counter++
     }
   }
 
   // check bottom left
-  if(gameState[x - 1] !== undefined) {
-    if(gameState[x - 1][y + 1] !== undefined) {
-      if(gameState[x - 1][y + 1] == 'x') counter++
+  if(gamestate[x - 1] !== undefined) {
+    if(gamestate[x - 1][y + 1] !== undefined) {
+      if(gamestate[x - 1][y + 1] == 'x') counter++
     }
   }
 
   // check bottom
-  if(gameState[x] !== undefined) {
-    if(gameState[x][y + 1] !== undefined) {
-      if(gameState[x][y + 1] == 'x') counter++
+  if(gamestate[x] !== undefined) {
+    if(gamestate[x][y + 1] !== undefined) {
+      if(gamestate[x][y + 1] == 'x') counter++
     }
   }
 
   // check bottom right
-  if(gameState[x + 1] !== undefined) {
-    if(gameState[x + 1][y + 1] !== undefined) {
-      if(gameState[x + 1][y + 1] == 'x') counter++
+  if(gamestate[x + 1] !== undefined) {
+    if(gamestate[x + 1][y + 1] !== undefined) {
+      if(gamestate[x + 1][y + 1] == 'x') counter++
     }
   }
   return counter
@@ -309,7 +309,7 @@ const revealTile = tile => {
   let lastSlash = currImg.lastIndexOf('/')
   let basePath = currImg.substr(0, lastSlash + 1)
 
-  let tileVal = gameState[xpos][ypos]
+  let tileVal = gamestate[xpos][ypos]
   switch(tileVal) {
     case 0:
       $(tile).attr('src', basePath + pics.empty)
@@ -443,8 +443,8 @@ $('.diff').click(e => {
 })
 
 $('.tsImg').click(e => {
-  // setTileSet($(e.currentTarget).attr('tileSet'))
-  // refreshTileSet()
+  setTileSet($(e.currentTarget).attr('tileSet'))
+  refreshTileSet()
 })
 
 $('#sender').click(e => {
