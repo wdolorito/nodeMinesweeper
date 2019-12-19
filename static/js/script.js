@@ -22,7 +22,7 @@ const pics = {
 const baseassetpath = '/assets/'
 let tileset = baseassetpath + 'set1/'
 
-let gameTimer = null
+let gametimer = null
 let timeCount = 0
 let minesInPlay = 0
 let minesFull = false
@@ -57,15 +57,15 @@ games.push(expert)
  */
 
 const startGame = () => {
-  if(!gameTimer) {
+  if(!gametimer) {
     setupTimer()
   }
 }
 
 const endGame  = () => {
   gameRunning = false
-  clearInterval(gameTimer)
-  gameTimer = null
+  clearInterval(gametimer)
+  gametimer = null
 }
 
 const resetTimer = () => {
@@ -75,7 +75,7 @@ const resetTimer = () => {
 
 const setupTimer = () => {
   gameRunning = true
-  gameTimer = setInterval(function() {
+  gametimer = setInterval(function() {
     timeCount++
     $('#gameTimer').html(timeCount)
   }, 1000)
