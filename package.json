@@ -8,7 +8,7 @@
     "gmail-send": "^1.8.10"
   },
   "devDependencies": {
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.4"
   },
   "scripts": {
     "start": "node index.js",
