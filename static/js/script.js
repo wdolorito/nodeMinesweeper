@@ -403,7 +403,6 @@ const revealTile = tile => {
       break
     default:
   }
-  validateGame()
 }
 
 const revealMines = (erow, ecol) => {
@@ -456,6 +455,7 @@ $(document).on('mousedown', '.tileImg', e => {
       break
     default:
   }
+  validateGame()
 })
 
 $('#ddDifficulty > li').click(e => {
