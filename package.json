@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/wdolorito/nodeMinesweeper.git"
+    "url": "git+ssh://git@github.com/wdolorito/nodeMinesweeper.git"
   },
   "author": "William Dolorito",
   "license": "UNLICENSED"
