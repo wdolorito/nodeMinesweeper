@@ -4,11 +4,11 @@
   "description": "Simple minesweeper clone",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.17.1",
-    "gmail-send": "^1.8.10"
+    "express": "*",
+    "gmail-send": "*"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "*"
   },
   "scripts": {
     "start": "node index.js",
